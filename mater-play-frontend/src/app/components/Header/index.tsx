@@ -8,9 +8,9 @@ function Header() {
                     <h6>Mater Play</h6>
                     <nav>
                         <ul>
-                            <li><a href="#">Todos</a></li>
-                            <li><a href="#">Séries</a></li>
-                            <li><a href="#">Filmes</a></li>
+                            <li><a href="#" className='active'>Todos</a></li>
+                            <li><a href="#" className='active'>Séries</a></li>
+                            <li><a href="#" className='active'>Filmes</a></li>
                         </ul>
                     </nav>
                 </div>
