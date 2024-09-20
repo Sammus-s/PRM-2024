@@ -2,7 +2,7 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import MovieCard from "../MovieCard";
 
 const movies = [
-      {poster: 'aAcólita.jpg'}
+      {poster: 'aAcolita.jpg'}
     , {poster: 'AlertadeRisco.jpg'}
     , {poster: 'AmigosImaginários.jpg'}
     , {poster: 'DivertidaMente2.jpg'}
@@ -14,19 +14,32 @@ const movies = [
     , {poster: 'umLugarSilenciosoDiaUm.jpg'}
 ];
 
-function Section(){
+type SectionProps = {
+    title : string;
+}
+
+function Section({title}: SectionProps){
     return(
         <Box>
             <Container>
                 <Typography
                   variant="h6"
+                  sx={{
+                    fontWeight: 400,
+                    marginTop: '2rem'
+                  }}
                 >
-                    Para Toda a Família
+                    {title}
                 </Typography>
 
                 <Stack
                   direction="row"
                   gap={0.5}
+                  sx={{
+                    overflowY: 'hidden',
+                    whiteSpace: 'nowrap',
+                    paddingY: '1rem'
+                  }}
                 >
                   {movies.map(item => (
                     <MovieCard poster={'assets/'+item.poster}/>
