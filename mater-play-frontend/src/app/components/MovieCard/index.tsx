@@ -17,7 +17,9 @@ function MovieCard({
           }}
         >
             <img src={ poster } 
-              
+              style={{
+                width: '100%'
+              }}
             />
         </Paper>
     )
