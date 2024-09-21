@@ -21,8 +21,8 @@ function Header() {
                       }}
                     >
                         <MenuButton variant="text" disabled>Todos</MenuButton>
-                        <MenuButton variant="text" disabled>Séries</MenuButton>
-                        <MenuButton variant="text" disabled>Filmes</MenuButton>
+                        <MenuButton variant="text" >Séries</MenuButton>
+                        <MenuButton variant="text" >Filmes</MenuButton>
                     </Box>
                 </Toolbar>
             </Container>
