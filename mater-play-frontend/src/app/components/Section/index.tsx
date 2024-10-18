@@ -1,24 +1,23 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import MovieCard from "../MovieCard";
+import { useEffect, useState } from "react";
+import { IMovie } from "../../@libs/types";
+import { MoviesService } from "../../services/movie-service";
 
-const movies = [
-      {poster: 'aAcolita.jpg'}
-    , {poster: 'AlertadeRisco.jpg'}
-    , {poster: 'AmigosImaginários.jpg'}
-    , {poster: 'DivertidaMente2.jpg'}
-    , {poster: 'FuriosaMadMax.jpg'}
-    , {poster: 'house-of-dragons-poster.jpg'}
-    , {poster: 'MateriaEscura.jpg'}
-    , {poster: 'oMeninoeaGarca.jpg'}
-    , {poster: 'theBoys.jpg'}
-    , {poster: 'umLugarSilenciosoDiaUm.jpg'}
-];
+
 
 type SectionProps = {
     title : string;
 }
 
 function Section({title}: SectionProps){
+
+    const [movies, getMovies] = useState<IMovie[]>([]);
+
+    useEffect(()=>{
+      MoviesService.getMovies().then(result => getMovies(result));
+    }, []);
+
     return(
         <Box>
             <Container>
@@ -42,7 +41,7 @@ function Section({title}: SectionProps){
                   }}
                 >
                   {movies.map(item => (
-                    <MovieCard poster={'assets/'+item.poster}/>
+                    <MovieCard key={item.id} poster={'assets/'+item.poster}/>
                   ))}
                   
                 </Stack>
