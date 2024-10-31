@@ -9,10 +9,11 @@ const getMovies = async (): Promise<IMovie[]> => {
 }
 
 const getMoviesById = async (id:string): Promise<IMovie> => {
-    const {data} = await API.get(`${_ENDPOINT}\${id}`);
+    const {data} = await API.get(`${_ENDPOINT}/${id}`);
     return data;
 }
 
 export const MoviesService = {
-    getMovies
+    getMovies,
+    getMoviesById
 }
