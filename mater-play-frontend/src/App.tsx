@@ -33,12 +33,10 @@ function App() {
 
         {
           categories.map(item => (
-            <Section title={item.name} key={item.id} />
+            <Section category={item} key={item.id} />
           ))
         }
-
-        {/* <Section title="Para Toda a Família" />
-        <Section title="Para Você" /> */}
+        
       </main>
       <Footer />
     </div>

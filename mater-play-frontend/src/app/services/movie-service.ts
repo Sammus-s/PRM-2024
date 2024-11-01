@@ -13,7 +13,13 @@ const getMoviesById = async (id:string): Promise<IMovie> => {
     return data;
 }
 
+const getMoviesByCategory = async (categoryId:number): Promise<IMovie[]> => {
+    const {data} = await API.get(`${_ENDPOINT}?categoryId=${categoryId}`);
+    return data;
+}
+
 export const MoviesService = {
     getMovies,
-    getMoviesById
+    getMoviesById,
+    getMoviesByCategory
 }
