@@ -1,72 +1,99 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { MovieService } from "../../services/movie-service";
+import { IMovie } from "../../@libs/types";
 
-function HighLightSection(){
-    return(
-        <Box>
-            <Container>
-                <Stack
-                  direction="row"
-                >
-                    <img src="assets/theBoys.jpg"/>
-                    <Stack
-                      sx={{
-                        justifyContent:'center',
-                        paddingLeft:'3rem'
-                      }}
-                    >
-                        <Typography
-                          variant="h4"
-                        >
-                            The Boys
-                        </Typography>
-                        
-                        <Typography
-                          variant="subtitle2"
-                        >
-                            <span
-                              style={{
-                                borderStyle: 'solid',
-                                borderWidth: '1px',
-                                borderColor: 'orange',
-                                padding: '0.2rem',
-                                marginRight: '0.3rem'
-                              }}
-                            >16</span>
-                            fantasia, aventura, the boys
-                        </Typography>
+function HighLightSection() {
 
-                        <Typography
-                          variant="subtitle1"
-                          sx={{
-                            paddingTop:'2rem',
-                            marginBottom:'0.5rem'
-                          }}
-                        >
-                            Sinopse
-                        </Typography>
-                        
-                        <Typography
-                          variant="body2"
-                        >
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt ea, nam sed autem alias quidem accusantium animi temporibus soluta nemo quibusdam at. Laborum odio blanditiis enim doloremque eos aliquid deserunt.
-                        </Typography>
+  const params = useParams();
 
-                        <Stack
-                          direction="row"
-                          gap={1}
-                          sx={{
-                            paddingY:'1rem'
-                          }}
-                        >
-                            <Button variant="outlined" >Assistir</Button>
-                            <Button variant="outlined" >Detalhes</Button>
-                        </Stack>
-                        
-                    </Stack>
-                </Stack>
-            </Container>
-        </Box>
-    )
-};
+  const [movie, setMovie] = useState<IMovie>({} as IMovie);
+
+  useEffect(()=>{
+
+    const movieId = (params.id) ? params.id : '66545bb4-2db3-4c1f-8986-1254f878900e'
+    
+    MovieService.getMoviesById(movieId)
+      .then(result => {
+        if (result) setMovie(result);
+      })
+      .catch(error => {
+        console.log('PAU: ', error)
+      })
+
+  },[params]);
+
+  return (
+    <Box>
+      <Container>
+        <Stack
+          direction="row"
+        >
+          <img src={`assets/${movie.poster}`} />
+          <Stack
+            sx={{
+              justifyContent: 'center',
+              paddingLeft: '3rem'
+            }}
+          >
+            <Typography
+              variant="h4"
+            >
+              {movie.title}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+            >
+              <span
+                style={{
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  padding: '0.2rem',
+                  marginRight: '0.3rem'
+                }}
+              >
+                {movie.ageRating}
+              </span>
+              Aventura, Fantasia, Ação
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                paddingTop: '2rem',
+                marginBottom: '0.5rem'
+              }}
+            >
+              Sinopse
+            </Typography>
+            <Typography
+              variant="body2"
+            >
+              {movie.description}
+            </Typography>
+            <Stack
+              gap={1}
+              direction="row"
+              sx={{
+                paddingY: '1rem'
+              }}
+            >
+              <Button 
+                variant="outlined"
+              >
+                Assistir
+              </Button>
+              <Button
+                variant="outlined"
+              >
+                Detalhes
+              </Button>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Container>
+    </Box>   
+  )
+}
 
 export default HighLightSection;
