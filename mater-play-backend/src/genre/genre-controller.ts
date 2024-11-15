@@ -14,7 +14,7 @@ import {
 import { GenreService } from './genre-service';
 import { Genre } from './genre-entity';
 
-@Controller('categories')
+@Controller('genres')
 export class GenreController {
   constructor(private service: GenreService) {}
 
