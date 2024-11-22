@@ -18,6 +18,17 @@ const getByCategoryId = async (id: number): Promise<IMovie[]> => {
   return data;
 } 
 
+const upload = (file: File) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  return API.post(`${_ENDPOINT}/upload`, formData, {
+    headers:{
+      'Content-Type': 'multiplart/form-data'
+    }
+  })
+}
+
 export const MovieService = {
   getMovies,
   getMoviesById,
